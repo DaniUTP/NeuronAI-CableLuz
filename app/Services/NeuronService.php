@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Mail;
 use App\Mail\ContactFormConfirmation;
 use App\Mail\ContactUserMail;
 use Illuminate\Support\Facades\Storage;
+use RuntimeException;
 
 class NeuronService extends Agent
 {
@@ -27,10 +28,10 @@ class NeuronService extends Agent
             $this->cableLuzData = json_decode($jsonContent, true);
 
             if (json_last_error() !== JSON_ERROR_NONE) {
-                throw new \RuntimeException('Error al decodificar el JSON: ' . json_last_error_msg());
+                throw new RuntimeException('Error al decodificar el JSON: ' . json_last_error_msg());
             }
         } else {
-            throw new \RuntimeException("El archivo JSON no existe en: storage/app/public/{$jsonPath}");
+            throw new RuntimeException("El archivo JSON no existe en: storage/app/public/{$jsonPath}");
         }
     }
 
